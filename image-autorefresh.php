@@ -33,19 +33,20 @@ function image_autorefresh_shortcode($atts){
 	ob_start();
 	?>
 	<script>
-	    setInterval(function()
-        {
+		setInterval(function()
+		{
             if(document.hasFocus()){
-               d = new Date();
-               image = jQuery('img#image_autorefresh_<?php echo $randomString ?>');
-               if(image.data("query") == ''){
-	               image.attr("src", image.data("src") + "?" + d.getTime());
-               }else{
-	               image.attr("src", image.data("src") + "?" + d.getTime() + "&" + image.data("query"));
-               }    
-            }
-        }, <?php echo $a['refresh_time']; ?>000);
-
+				   d = new Date();
+				   jQuery('img.image_autorefresh').each(function(){
+					   if(this.dataset.query == ''){
+					   		document.getElementById(this.id).src = this.dataset.src + "?" + d.getTime();
+					   }
+					   else{
+					   		document.getElementById(this.id).src =  this.dataset.src  + "?" + d.getTime() + "&" + this.dataset.query;
+					   }    
+				});
+			}
+		}, <?php echo $a['refresh_time']; ?>000);
 	</script>
 
 	<div class="<?php echo '' != $a['caption'] ? 'wp-caption ': ''; ?>align<?php echo $a['align']; ?>">
