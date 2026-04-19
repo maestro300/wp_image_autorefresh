@@ -16,10 +16,10 @@ jQuery(document).ready(function(){
         jQuery('img.image_autorefresh').each(function(){
                d = new Date();
 
-               if(this.data("query") == ''){
-            	   this.attr("src", this.data("src") + "?" + d.getTime());
+               if(this.dataset.query == ''){
+            	   document.getElementById(this.id).src = this.dataset.src + "?" + d.getTime();
                }else{
-            	   this.attr("src", this.data("src") + "?" + d.getTime() + "&" + this.data("query"));
+            	   document.getElementById(this.id).src = this.dataset.src  + "?" + d.getTime() + "&" + this.dataset.query;
                } 
         });
 
